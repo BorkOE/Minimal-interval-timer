@@ -2,4 +2,4 @@
 
 A minimal interval timer for training. 
 
-<img src="https://github.com/BorkOE/minimal_interval_timer/blob/main/timer.gif?raw=true" width="149" height="180" />
+<img src="https://github.com/BorkOE/minimal_interval_timer/blob/main/timer.gif?raw=true" width="180" height="149" />
