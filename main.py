@@ -154,7 +154,7 @@ class Timer():
 
 class Inputbox():
     w,h = 220,20
-    def __init__(self, pos, input_text, type, default_input=''):
+    def __init__(self, pos, input_text, default_input=''):
         '''inputbox with text to the left'''
         self.active = False
         self.surf = pg.Surface((self.w,self.h))
@@ -219,11 +219,11 @@ class Startscreen():
             pg.display.set_mode((screen_width,screen_height), flags)
             if reset:
                 self.input_boxes.update({
-                    'tot_tid':Inputbox((x_pos,5+(y_delta*0)), f'{total_time_txt} (min)', '', default_input=30),
-                    'uppvärm_tid':Inputbox((x_pos,5+(y_delta*1)), f'{warmup_txt} (min)', '', default_input=10),
-                    'n_spurt':Inputbox((x_pos,5+y_delta*2), n_sprint, 'n', default_input=5),
-                    'spurt_tid':Inputbox((x_pos,5+(y_delta*3)), f'{sprint_txt} (sec)', '', default_input=45),
-                    'nedvarv_tid':Inputbox((x_pos,5+(y_delta*4)), f'{cooldown_txt} (min)', 'min', default_input=5),
+                    'tot_tid':Inputbox((x_pos,5+(y_delta*0)), f'{total_time_txt} (min)', default_input=tot_time_def),
+                    'uppvärm_tid':Inputbox((x_pos,5+(y_delta*1)), f'{warmup_txt} (min)', default_input=warmup_time_def),
+                    'n_spurt':Inputbox((x_pos,5+y_delta*2), n_sprint, default_input=sprint_count_def),
+                    'spurt_tid':Inputbox((x_pos,5+(y_delta*3)), f'{sprint_txt} (sec)', default_input=sprint_time_def),
+                    'nedvarv_tid':Inputbox((x_pos,5+(y_delta*4)), f'{cooldown_txt} (min)', default_input=cooldown_time_def),
                 })
 
     def startscreen(self, screen, event_list, mouse_pos):
