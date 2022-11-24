@@ -23,11 +23,11 @@ class Graphics():
     
     def set_event_graphics(self, event, next_event):
         self.event_image = self.surf.copy()
-        if event == warmup_txt:
+        if warmup_txt in event:
             self.event_image.fill('yellow')
-        elif event == rest_txt:
+        elif rest_txt in event:
             self.event_image.fill('green')
-        elif event == cooldown_txt:
+        elif cooldown_txt in event:
             self.event_image.fill('yellow')
         else:
             self.event_image.fill('red')
@@ -46,8 +46,8 @@ class Graphics():
 
     def update_time(self, time, tot_time):
         self.image = self.event_image.copy()
-        text_time = self.render_text(self.expand_sec(time), 30)
-        text_tot_time = self.render_text(self.expand_sec(tot_time), 16)
+        text_time = self.render_text(self.expand_sec(time-1), 30)
+        text_tot_time = self.render_text(self.expand_sec(tot_time-1), 16)
         self.image.blit(text_time, (self.x_marg,35))
         self.image.blit(text_tot_time, (self.x_marg,55))
 
@@ -88,6 +88,7 @@ class Timer():
         self.total_time_left = sec(time_vals['tot_tid'])
         self.active = False
         self.tt = self.get_timetable(time_vals)
+        # self.total_time_left = sum(self.tt.values()) # DEBUGG
         self.current_event= None
         self.current_event_dict = None
         self.event_list = list(self.tt.keys())
@@ -110,7 +111,7 @@ class Timer():
             tt.update({sprint:time_vals['spurt_tid']})
             tt.update({vila:mellan_sprint - time_vals['spurt_tid']})
         tt.update({cooldown_txt:sec(time_vals['nedvarv_tid'])})
-        # tt = {'nedvarv':5}  # DEBUG
+        # tt = {warmup_txt:5,rest_txt:3,cooldown_txt:5}  # DEBUG
         return tt
     
     def run(self):
@@ -137,7 +138,7 @@ class Timer():
         if self.one_sec():
             self.total_time_left += -1
             time_left = self.current_event_dict[self.current_event]
-            if time_left > 0:
+            if time_left > 1:
                 self.current_event_dict[self.current_event] += -1
                 self.graphics.update_time(self.current_event_dict[self.current_event], self.total_time_left)
             else:
